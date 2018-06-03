@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 //-----------ROUTING
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
+import { UsersService } from './shared/services/users.service';
 
 
 
@@ -26,7 +27,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     SharedModule
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
