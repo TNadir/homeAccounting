@@ -1,0 +1,34 @@
+<p class="text-xs-center">Войдите для работы</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group" [ngClass]="{'has-error':form.get('email').invalid&&form.get('email').touched}">
+        <label for="email">Email</label>
+        <input type="text" class="form-control underlined" id="email" placeholder="Введите ваш email" formControlName="email">
+
+        <span class="form-help-text" *ngIf="form.get('email').invalid&&form.get('email').touched">
+
+            <span *ngIf="form.get('email')['errors']['required']">
+                Enter your email!!
+            </span>
+            <span *ngIf="form.get('email')['errors']['email']">
+                Enter correct email!!
+            </span>
+
+        </span>
+
+
+
+    </div>
+    <div class="form-group">
+        <label for="password">Пароль</label>
+        <input type="password" class="form-control underlined" id="password" placeholder="Пароль" formControlName="password">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-block btn-primary">Войти</button>
+    </div>
+    <div class="form-group">
+        <p class="text-muted text-xs-center">
+            Нет аккаунта?
+            <a href="#">Зарегистрироваться!</a>
+        </p>
+    </div>
+</form>
