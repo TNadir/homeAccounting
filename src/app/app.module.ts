@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { UsersService } from './shared/services/users.service';
 import { AuthService } from './shared/services/auth.service';
+import { SystemModule } from './system/system.module';
 
 
 
@@ -26,7 +27,8 @@ import { AuthService } from './shared/services/auth.service';
     HttpModule,
     AuthModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    SystemModule
   ],
   providers: [UsersService, AuthService],
   bootstrap: [AppComponent]
