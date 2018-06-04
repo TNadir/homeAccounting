@@ -15,19 +15,19 @@
       <nav class="menu">
           <ul class="nav metismenu">
               <li routerLinkActive="active">
-                  <a  [routerLink]="['/bill']" >
+                  <a  [routerLink]="['bill']" >
                       <i class="fa fa-building-o"></i> Счет </a>
               </li>
-              <li>
-                  <a  [routerLink]="['/history']">
+              <li   routerLinkActive="active" >
+                  <a  [routerLink]="['history']">
                       <i class="fa fa-flash"></i> История </a>
               </li>
-              <li>
-                  <a  [routerLink]="['/planning']">
+              <li  routerLinkActive="active" >
+                  <a  [routerLink]="['planning']">
                       <i class="fa fa-archive"></i> Планирование </a>
               </li>
-              <li>
-                  <a  [routerLink]="['/records']">
+              <li  routerLinkActive="active" >
+                  <a  [routerLink]="['records']">
                       <i class="fa fa-plus-square"></i> Запись </a>
               </li>
           </ul>
