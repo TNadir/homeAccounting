@@ -5,6 +5,7 @@ import { User } from '../../shared/models/user.model';
 import { Message } from '../../shared/models/message.model';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'wfm-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   message: Message;
 
+  allusers: User[];
 
   constructor(
     private userService: UsersService
@@ -30,11 +32,20 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.message = new Message('danger', '');
 
+    // this.userService.getAllUsers().subscribe(
+    //   (data: User[]) => {
+    //     this.allusers=data;
+    //    console.log(this.allusers);
+    //   }
+    // );
+
+
+
+
 
     this.activRouter.queryParams
       .subscribe((params: Params) => {
-        if(params['nowCanLogin'])
-        {
+        if (params['nowCanLogin']) {
           this.showMessage('success', 'You can login now')
         }
       });
@@ -59,29 +70,29 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit() {
-
-
+    
     const formData = this.form.value;
-
-    this.userService.getUserByEmail(formData.email)
+    this.userService.getUserByEmailPassword(formData.email,formData.password)
       .subscribe((user: User) => {
-
         if (user) {
 
-          if (user.password == formData.password) {
-            this.message.text = '';
-            window.localStorage.setItem('user', JSON.stringify(user));
-            this.authService.login();
-            this.router.navigate(['/system','bill']);
+          user.password='';
+          this.message.text = '';
+          window.localStorage.setItem('user', JSON.stringify(user));
+          this.authService.login();
+          this.router.navigate(['/system', 'bill']);
 
-          } else {
+          // if (user.password == formData.password) {
+          
 
-            this.showMessage('danger', 'Username or password incorrect!!')
-          }
+          // } else {
+
+          //   this.showMessage('danger', 'Username or password incorrect!!')
+          // }
 
         } else {
 
-          this.showMessage('danger', 'User not found!!')
+          this.showMessage('danger', 'Username or password incorrect!!')
         }
 
 
