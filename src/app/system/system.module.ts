@@ -1,3 +1,4 @@
+import { CategoryService } from './shared/services/categories.service';
 import { NgModule } from "@angular/core";
 import { SystemComponent } from "./system.component";
 import { CommonModule } from "@angular/common";
@@ -42,7 +43,8 @@ import { EditCategoryComponent } from './records-page/edit-category/edit-categor
         SystemRoutingModule
     ],
     providers:[
-        BillService
+        BillService,
+        CategoryService
     ]
 })
 export class SystemModule { }

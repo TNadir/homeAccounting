@@ -5,16 +5,26 @@
     </div>
   </div>
   <div class="card-block">
-    <form #f="ngForm"  (ngSubmit)="onSubmit()" >
-      <div class="form-group has-error">
-        <label class="control-label" for="category-name">Введите название</label>
-        <input type="text" id="category-name" class="form-control">
-        <span class="form-help-text">Валидация ошибка</span>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="form-group"
+      [ngClass]="{'has-error':name.invalid&&name.touched}">
+        <label class="control-label" for="name">Введите название</label>
+
+        <input type="text" id="name" class="form-control" #name="ngModel" name="name" ngModel required>
+
+        <span *ngIf="name.invalid&&name.touched" class="form-help-text">Enter category name!</span>
+
       </div>
-      <div class="form-group has-success">
-        <label class="control-label" for="category-value">Введите лимит</label>
-        <input type="number" value="0" id="category-value" class="form-control">
-        <span class="form-help-text">Валидация нет ошибки</span>
+      <div class="form-group"
+      [ngClass]="{'has-error':capacity.invalid&&capacity.touched}"
+      >
+
+        <label class="control-label" for="capacity">Введите лимит</label>
+
+        <input type="number" min="1" value="0" id="capacity" class="form-control" [ngModel]="1" #capacity="ngModel" name="capacity" ngModel required>
+
+        <span *ngIf="capacity.invalid&&capacity.touched" class="form-help-text">Enter category value!!</span>
+
       </div>
       <button type="submit" class="btn btn-primary">Добавить</button>
     </form>
