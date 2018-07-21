@@ -17,4 +17,10 @@ export class CategoryService extends BaseApi{
       return this.post("/api/category/addcategories",category);
     }
 
+   getCategories():Observable<Category[]>
+   {
+    return this.get("/api/category/all");
+   }
+
+
 }

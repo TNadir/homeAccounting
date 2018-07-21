@@ -9,32 +9,36 @@
 
       <div class="form-group">
         <label for="e-select-category">Select kategory</label>
-        <select  id="e-select-category" class="form-control">
-          <option>1</option>
+        <select id="e-select-category" class="form-control" [(ngModel)]="currentCategoryId" 
+        (change)="onCategoryChange()" [ngModelOptions]="{standalone:true}">
+
+          <option *ngFor="let c of categories" [value]="c.id">
+            {{c.name}}
+          </option>
+
         </select>
       </div>
 
-      <div class="form-group"
-      [ngClass]="{'has-error':ename.invalid&&ename.touched}">
+      <div class="form-group" [ngClass]="{'has-error':ename.invalid&&ename.touched}">
         <label class="control-label" for="ename">Введите название</label>
 
-        <input type="text" id="ename" class="form-control" #ename="ngModel" name="ename" ngModel required>
+        <input type="text" id="ename" class="form-control" [ngModel]="selectedCategory.name" #ename="ngModel" name="ename" ngModel required>
 
         <span *ngIf="ename.invalid&&ename.touched" class="form-help-text">Enter category name!</span>
 
       </div>
-      <div class="form-group"
-      [ngClass]="{'has-error':ecapacity.invalid&&ecapacity.touched}"
-      >
+      <div class="form-group" [ngClass]="{'has-error':ecapacity.invalid&&ecapacity.touched}">
 
         <label class="control-label" for="ecapacity">Введите лимит</label>
 
-        <input type="number" min="1" value="0" id="ecapacity" class="form-control" [ngModel]="1" #ecapacity="ngModel" name="ecapacity" ngModel required>
+        <input type="number" min="1" value="0" id="ecapacity" [ngModel]="selectedCategory.capacity" class="form-control" [ngModel]="1" #ecapacity="ngModel" name="ecapacity"
+          ngModel required>
 
         <span *ngIf="ecapacity.invalid&&ecapacity.touched" class="form-help-text">Enter category value!!</span>
 
       </div>
-      <button type="submit" class="btn btn-primary">Добавить</button>
+      <button type="submit" class="btn btn-primary"
+      [disabled]="f.invalid">Редактироват</button>
     </form>
   </div>
 </div>

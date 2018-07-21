@@ -1,5 +1,6 @@
 import { Category } from './../shared/models/category.model';
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../shared/services/categories.service';
 
 @Component({
   selector: 'wfm-records-page',
@@ -8,15 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecordsPageComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  categories: Category[] = [];
+  isLoaded = false;
+  constructor(private categoryService: CategoryService) {
+
   }
 
-  newCategoryAdded(category:Category)
-  {
+  ngOnInit() {
+    this.categoryService.getCategories()
+      .subscribe((cats: Category[]) => {
+        this.categories = cats;
+        this.isLoaded = true;
+      });
+  }
 
-    //
+  newCategoryAdded(category: Category) {
+    this.categories.push(category);
   }
 
 }
