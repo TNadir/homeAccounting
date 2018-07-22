@@ -1,6 +1,8 @@
+import { CategoryService } from './../../shared/services/categories.service';
 import { Category } from './../../shared/models/category.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'wfm-edit-category',
@@ -15,7 +17,8 @@ export class EditCategoryComponent implements OnInit {
   currentCategoryId = 1;
   selectedCategory: Category;
 
-  constructor() { }
+  constructor(private categoryService: CategoryService
+  ,private toastr:ToastrService) { }
 
 
   onCategoryChange() {
@@ -28,7 +31,14 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-
+    let { ename, ecapacity } = form.value;
+    if (ecapacity < 0) ecapacity *= -1;
+    const category = new Category(ename, ecapacity, +this.currentCategoryId);
+    this.categoryService.updateCategories(category)
+      .subscribe((cat: Category) => {
+        this.toastr.warning('Category updated successfuly','Update category');
+      });
   }
+
 
 }

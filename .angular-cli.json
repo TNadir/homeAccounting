@@ -21,7 +21,8 @@
       "styles": [
         "styles.scss",
         "./assets/vendor.css",
-        "./assets/theme.css"
+        "./assets/theme.css",
+        "../node_modules/ngx-toastr/toastr.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

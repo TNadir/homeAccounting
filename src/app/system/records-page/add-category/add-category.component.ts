@@ -2,6 +2,7 @@ import { Category } from './../../shared/models/category.model';
 import { CategoryService } from './../../shared/services/categories.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'wfm-add-category',
@@ -12,7 +13,8 @@ export class AddCategoryComponent {
 
   @Output() onCategoryAdd = new EventEmitter<Category>();
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService
+    ,private toastr:ToastrService) { }
 
 
   onSubmit(form: NgForm) {
@@ -26,6 +28,8 @@ export class AddCategoryComponent {
         form.form.patchValue({ capacity: 1 });
         console.log(cat);
         this.onCategoryAdd.emit(cat);
+        this.toastr.success('Category added successfuly','New category');
+
       })
 
   }

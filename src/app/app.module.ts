@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http'
 import { AuthModule } from './auth/auth.module';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //----------COMPONENTS
 import { AppComponent } from './app.component';
@@ -28,9 +30,11 @@ import { SystemModule } from './system/system.module';
     AuthModule,
     AppRoutingModule,
     SharedModule,
-    SystemModule
+    SystemModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [UsersService, AuthService],
+  providers: [UsersService, AuthService, ToastrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
