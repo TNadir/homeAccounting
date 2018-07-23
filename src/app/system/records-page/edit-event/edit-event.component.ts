@@ -14,7 +14,7 @@ export class EditEventComponent implements OnInit {
 
 
   showEditTodo() {
-    this.msg = "sdfsdfdsfsdfdsf sfsdfds";
+    this.msg = "1111 sfsdfds";
   }
 
 

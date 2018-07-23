@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="card-block">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <!-- <form #f="ngForm" (ngSubmit)="onSubmit(f)">
 
       <div class="form-group">
         <label for="e-select-category">Select kategory</label>
@@ -38,6 +38,74 @@
 
       </div>
       <button type="submit" class="btn btn-primary"  [disabled]="f.invalid">Редактироват</button>
-    </form>
+    </form> -->
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Capacity</th>
+          <th class="text-lg-center">Действие</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of categories">
+          <th scope="row">{{c.id}}</th>
+          <td>{{c.name}}</td>
+          <td>{{c.capacity}}</td>
+          <td>
+            <button type="button" class="btn btn-info-outline btn-xs" data-toggle="modal" data-target="#editModal" (click)="showEditTodo(c)">update</button>
+          </td>
+          <td class="text-lg-center">
+            <button type="button" class="btn btn-danger-outline btn-xs"  (click)="onDelete(c)">delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="editModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header ll</h4>
+
+          </div>
+
+          <div class="modal-body">
+            <div class="form-group" [ngClass]="{'has-error':ename.invalid&&ename.touched}">
+              <label class="control-label" for="ename">Введите название</label>
+
+              <input type="text" id="ename" class="form-control" [(ngModel)]="name" #ename="ngModel" name="ename" required>
+
+              <span *ngIf="ename.invalid&&ename.touched" class="form-help-text">Enter category name!</span>
+
+            </div>
+            <div class="form-group" [ngClass]="{'has-error':ecapacity.invalid&&ecapacity.touched}">
+
+              <label class="control-label" for="ecapacity">Введите лимит</label>
+
+              <input type="number" min="1" value="0" id="ecapacity" [(ngModel)]="capacity" class="form-control" [ngModel]="1" #ecapacity="ngModel"
+                name="ecapacity" ngModel required>
+
+              <span *ngIf="ecapacity.invalid&&ecapacity.touched" class="form-help-text">Enter category value!!</span>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary " (click)="onEdit()" data-dismiss="modal" [disabled]="ename.invalid||ecapacity.invalid">
+              Редактироват</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </div>

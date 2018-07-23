@@ -24,4 +24,8 @@ export class CategoryService extends BaseApi {
         return this.put("/api/category/update", category);
     }
 
+    deleteCategories(category: Category): Observable<Category> {
+        return this.post("/api/category/delete", category);
+    }
+
 }
